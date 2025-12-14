@@ -953,100 +953,6 @@
                 por la comunidad. Mantén un registro organizado y toma acciones informadas.
             </p>
         </div>
-
-        <!-- CONTENEDOR PRINCIPAL -->
-        <div class="reports-container">
-            <!-- PANEL LATERAL -->
-            <div class="sidebar">
-                <!-- FILTROS -->
-                <div class="filters-section">
-                    <h3 class="sidebar-title">🔍 FILTROS DE BÚSQUEDA</h3>
-                    
-                    <div class="filter-group">
-                        <label class="filter-label">📅 FECHA</label>
-                        <input type="date" class="filter-input" id="filterDate">
-                    </div>
-                    
-                    <div class="filter-group">
-                        <label class="filter-label">📍 ZONA/CIUDAD</label>
-                        <select class="filter-select" id="filterZone">
-                            <option value="">Todas las zonas</option>
-                            <option value="norte">Zona Norte</option>
-                            <option value="sur">Zona Sur</option>
-                            <option value="este">Zona Este</option>
-                            <option value="oeste">Zona Oeste</option>
-                            <option value="centro">Centro</option>
-                        </select>
-                    </div>
-                    
-                    <div class="filter-group">
-                        <label class="filter-label">⚠️ TIPO DE PROBLEMA</label>
-                        <select class="filter-select" id="filterType">
-                            <option value="">Todos los tipos</option>
-                            <option value="basura">Basura acumulada</option>
-                            <option value="quimicos">Derrame químico</option>
-                            <option value="deforestacion">Deforestación</option>
-                            <option value="agua">Contaminación agua</option>
-                            <option value="aire">Contaminación aire</option>
-                            <option value="animales">Maltrato animal</option>
-                        </select>
-                    </div>
-                    
-                    <div class="filter-group">
-                        <label class="filter-label">📊 ESTADO</label>
-                        <select class="filter-select" id="filterStatus">
-                            <option value="">Todos los estados</option>
-                            <option value="pendiente">Pendiente</option>
-                            <option value="investigacion">En investigación</option>
-                            <option value="resuelto">Resuelto</option>
-                            <option value="cerrado">Cerrado</option>
-                        </select>
-                    </div>
-                    
-                    <div class="filter-group">
-                        <label class="filter-label">🚨 PRIORIDAD</label>
-                        <select class="filter-select" id="filterPriority">
-                            <option value="">Todas las prioridades</option>
-                            <option value="alta">Alta</option>
-                            <option value="media">Media</option>
-                            <option value="baja">Baja</option>
-                        </select>
-                    </div>
-                    
-                    <div class="filter-buttons">
-                        <button id="applyFilters" class="filter-btn filter-apply">🔍 APLICAR FILTROS</button>
-                        <button id="resetFilters" class="filter-btn filter-reset">🔄 RESTABLECER</button>
-                    </div>
-                </div>
-
-                <!-- ESTADÍSTICAS -->
-                <div class="stats-section">
-                    <h3 class="sidebar-title">📊 ESTADÍSTICAS</h3>
-                    
-                    <div class="stats-grid">
-                        <div class="stat-item">
-                            <div class="stat-number" id="totalReports">0</div>
-                            <div class="stat-label">TOTAL DENUNCIAS</div>
-                        </div>
-                        
-                        <div class="stat-item">
-                            <div class="stat-number" id="pendingReports">0</div>
-                            <div class="stat-label">PENDIENTES</div>
-                        </div>
-                        
-                        <div class="stat-item">
-                            <div class="stat-number" id="resolvedReports">0</div>
-                            <div class="stat-label">RESUELTAS</div>
-                        </div>
-                        
-                        <div class="stat-item">
-                            <div class="stat-number" id="highPriority">0</div>
-                            <div class="stat-label">ALTA PRIORIDAD</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
             <!-- ÁREA PRINCIPAL -->
             <div class="main-content">
                 <div class="content-header">
@@ -1588,26 +1494,7 @@
             const reporter = form.querySelector('#reporter').value || 'Anónimo';
             
             if (editingReportId) {
-                // Modo edición
-                const index = reportsDatabase.findIndex(r => r.id === editingReportId);
-                if (index !== -1) {
-                    reportsDatabase[index] = {
-                        ...reportsDatabase[index],
-                        location,
-                        date,
-                        time,
-                        type,
-                        typeText,
-                        priority,
-                        description,
-                        evidence,
-                        zone,
-                        reporter
-                    };
-                    
-                    alert(`✅ Denuncia ${editingReportId} actualizada correctamente.`);
-                    editingReportId = null;
-                }
+                
             } else {
                 // Modo nueva denuncia
                 const newId = `DEN-${String(reportsDatabase.length + 1).padStart(3, '0')}`;
@@ -1779,4 +1666,5 @@
 </body>
 
 </html>
+
 
