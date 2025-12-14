@@ -39,7 +39,7 @@
         }
 
         .container {
-            max-width: 1600px;
+            max-width: 1400px;
             margin: 0 auto;
             padding: 20px;
             position: relative;
@@ -167,139 +167,13 @@
             line-height: 1.8;
         }
 
-        /* CONTENEDOR PRINCIPAL */
-        .reports-container {
-            display: grid;
-            grid-template-columns: 300px 1fr;
-            gap: 40px;
-            margin-bottom: 60px;
-            min-height: 800px;
-        }
-
-        /* PANEL LATERAL - FILTROS Y ESTADÍSTICAS */
-        .sidebar {
-            background: rgba(52, 152, 219, 0.95);
-            border: 8px solid #2980b9;
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 10px 10px 0 rgba(41, 128, 185, 0.3);
-        }
-
-        .sidebar-title {
-            font-family: 'Press Start 2P', cursive;
-            font-size: 24px;
-            color: white;
-            margin-bottom: 30px;
-            text-align: center;
-            text-shadow: 2px 2px 0 #1a5276;
-        }
-
-        /* FILTROS */
-        .filters-section {
-            margin-bottom: 40px;
-        }
-
-        .filter-group {
-            margin-bottom: 25px;
-        }
-
-        .filter-label {
-            display: block;
-            font-size: 22px;
-            color: #ebf5fb;
-            margin-bottom: 12px;
-            font-weight: bold;
-        }
-
-        .filter-select {
-            width: 100%;
-            padding: 15px;
-            font-size: 20px;
-            font-family: 'VT323', monospace;
-            border: 4px solid #1a5276;
-            border-radius: 10px;
-            background: white;
-            cursor: pointer;
-        }
-
-        .filter-input {
-            width: 100%;
-            padding: 15px;
-            font-size: 20px;
-            font-family: 'VT323', monospace;
-            border: 4px solid #1a5276;
-            border-radius: 10px;
-            background: white;
-        }
-
-        .filter-buttons {
-            display: flex;
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .filter-btn {
-            flex: 1;
-            padding: 15px;
-            font-size: 20px;
-            font-family: 'VT323', monospace;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .filter-apply {
-            background: #2ecc71;
-            color: white;
-            border-bottom: 6px solid #27ae60;
-            border-right: 6px solid #27ae60;
-        }
-
-        .filter-reset {
-            background: #f39c12;
-            color: white;
-            border-bottom: 6px solid #d35400;
-            border-right: 6px solid #d35400;
-        }
-
-        /* ESTADÍSTICAS */
-        .stats-section {
-            margin-top: 40px;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 20px;
-        }
-
-        .stat-item {
-            background: rgba(255, 255, 255, 0.9);
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-            border: 4px solid;
-        }
-
-        .stat-number {
-            font-family: 'Press Start 2P', cursive;
-            font-size: 32px;
-            color: #2d6a4f;
-            margin-bottom: 10px;
-        }
-
-        .stat-label {
-            font-size: 18px;
-            color: #555;
-        }
-
         /* ÁREA PRINCIPAL - TABLA DE DATOS */
         .main-content {
             background: rgba(255, 255, 255, 0.95);
             border: 8px solid #27ae60;
             border-radius: 20px;
             padding: 40px;
+            margin-bottom: 60px;
             box-shadow: 10px 10px 0 rgba(39, 174, 96, 0.3);
         }
 
@@ -345,6 +219,12 @@
             color: white;
             border-bottom: 6px solid #8e44ad;
             border-right: 6px solid #8e44ad;
+        }
+
+        .btn-new:hover, .btn-export:hover {
+            transform: translate(2px, 2px);
+            border-bottom-width: 4px;
+            border-right-width: 4px;
         }
 
         /* TABLA DE DATOS */
@@ -700,7 +580,7 @@
             background: rgba(55, 71, 79, 0.9);
             border: 8px solid #263238;
             padding: 50px;
-            margin-top: 80px;
+            margin-top: 40px;
             text-align: center;
             color: #CFD8DC;
             border-radius: 20px;
@@ -733,25 +613,6 @@
         }
 
         /* RESPONSIVE */
-        @media (max-width: 1200px) {
-            .reports-container {
-                grid-template-columns: 1fr;
-            }
-            
-            .sidebar {
-                order: 2;
-            }
-            
-            .main-content {
-                order: 1;
-            }
-            
-            .data-table {
-                display: block;
-                overflow-x: auto;
-            }
-        }
-
         @media (max-width: 768px) {
             header {
                 flex-direction: column;
@@ -846,18 +707,18 @@
                 <div class="form-row">
                     <div class="form-full">
                         <label class="form-label">📍 UBICACIÓN</label>
-                        <input type="text" class="form-input" placeholder="Ej: Calle Principal #123, Ciudad" required>
+                        <input type="text" class="form-input" id="location" placeholder="Ej: Calle Principal #123, Ciudad" required>
                     </div>
                 </div>
                 
                 <div class="form-row">
                     <div>
                         <label class="form-label">📅 FECHA DEL HECHO</label>
-                        <input type="date" class="form-input" required>
+                        <input type="date" class="form-input" id="date" required>
                     </div>
                     <div>
                         <label class="form-label">🕒 HORA APROXIMADA</label>
-                        <input type="time" class="form-input" required>
+                        <input type="time" class="form-input" id="time" required>
                     </div>
                 </div>
                 
@@ -893,13 +754,6 @@
                 </div>
                 
                 <div class="form-row">
-                    <div class="form-full">
-                        <label class="form-label">📸 EVIDENCIAS (OPCIONAL)</label>
-                        <input type="text" class="form-input" id="evidence" placeholder="Ej: Fotos, videos, testigos...">
-                    </div>
-                </div>
-                
-                <div class="form-row">
                     <div>
                         <label class="form-label">📍 ZONA</label>
                         <select class="form-input" id="zone" required>
@@ -931,15 +785,15 @@
         <!-- HEADER -->
         <header>
             <div class="logo-container">
-                <img src="logo.png" alt="SEVENTH CYCLE Logo" width="70" height="70" class="logo-img">
+                <div class="logo-placeholder">SC</div>
                 <div class="company-name">SEVENTH CYCLE</div>
             </div>
             
             <nav>
                 <ul>
-                    <li><a href="index.html" class="nav-button">Inico</a></li>
-                    <li><a href="about.html" class="nav-button">sobre nosotros</a></li>
-                    <li><a href="contacto.html" class="nav-button">Contactanos</a></li>
+                    <li><a href="index.html" class="nav-button">Inicio</a></li>
+                    <li><a href="about.html" class="nav-button">Sobre nosotros</a></li>
+                    <li><a href="contacto.html" class="nav-button">Contáctanos</a></li>
                 </ul>
             </nav>
         </header>
@@ -953,38 +807,38 @@
                 por la comunidad. Mantén un registro organizado y toma acciones informadas.
             </p>
         </div>
-            <!-- ÁREA PRINCIPAL -->
-            <div class="main-content">
-                <div class="content-header">
-                    <h2 class="content-title">📋 REGISTRO DE DENUNCIAS</h2>
-                    <div class="action-buttons">
-                        <button id="newReportBtn" class="action-btn btn-new">➕ NUEVA DENUNCIA</button>
-                        <button id="exportBtn" class="action-btn btn-export">📥 EXPORTAR DATOS</button>
-                    </div>
+        
+        <!-- ÁREA PRINCIPAL -->
+        <div class="main-content">
+            <div class="content-header">
+                <h2 class="content-title">📋 REGISTRO DE DENUNCIAS</h2>
+                <div class="action-buttons">
+                    <button id="newReportBtn" class="action-btn btn-new">➕ NUEVA DENUNCIA</button>
+                    <button id="exportBtn" class="action-btn btn-export">📥 EXPORTAR DATOS</button>
                 </div>
+            </div>
 
-                <!-- TABLA DE DATOS -->
-                <table class="data-table" id="reportsTable">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>FECHA</th>
-                            <th>UBICACIÓN</th>
-                            <th>TIPO</th>
-                            <th>PRIORIDAD</th>
-                            <th>ESTADO</th>
-                            <th>ACCIONES</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tableBody">
-                        <!-- Los datos se cargan dinámicamente aquí -->
-                    </tbody>
-                </table>
+            <!-- TABLA DE DATOS -->
+            <table class="data-table" id="reportsTable">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>FECHA</th>
+                        <th>UBICACIÓN</th>
+                        <th>TIPO</th>
+                        <th>PRIORIDAD</th>
+                        <th>ESTADO</th>
+                        <th>ACCIONES</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    <!-- Los datos se cargan dinámicamente aquí -->
+                </tbody>
+            </table>
 
-                <!-- PAGINACIÓN -->
-                <div class="pagination" id="pagination">
-                    <!-- Los botones de paginación se generan dinámicamente -->
-                </div>
+            <!-- PAGINACIÓN -->
+            <div class="pagination" id="pagination">
+                <!-- Los botones de paginación se generan dinámicamente -->
             </div>
         </div>
 
@@ -1019,7 +873,6 @@
                 status: "pendiente",
                 reporter: "Ana García",
                 contact: "ana@email.com",
-                evidence: "Fotos disponibles",
                 zone: "norte"
             },
             {
@@ -1034,7 +887,6 @@
                 status: "investigacion",
                 reporter: "Carlos Méndez",
                 contact: "carlos@empresa.com",
-                evidence: "Muestras tomadas",
                 zone: "sur"
             },
             {
@@ -1049,7 +901,6 @@
                 status: "investigacion",
                 reporter: "Comunidad Local",
                 contact: "comunidad@bosque.org",
-                evidence: "Videos y coordenadas GPS",
                 zone: "este"
             },
             {
@@ -1064,7 +915,6 @@
                 status: "pendiente",
                 reporter: "Roberto Sánchez",
                 contact: "roberto@email.com",
-                evidence: "Registro de calidad del aire",
                 zone: "oeste"
             },
             {
@@ -1079,7 +929,6 @@
                 status: "resuelto",
                 reporter: "María López",
                 contact: "maria@tienda.com",
-                evidence: "Fotos de contenedores",
                 zone: "centro"
             },
             {
@@ -1094,7 +943,6 @@
                 status: "investigacion",
                 reporter: "Pesca Sostenible S.A.",
                 contact: "pesca@sostenible.com",
-                evidence: "Muestras de agua y fotos",
                 zone: "norte"
             },
             {
@@ -1109,7 +957,6 @@
                 status: "pendiente",
                 reporter: "Protección Animal",
                 contact: "animales@proteccion.org",
-                evidence: "Reporte veterinario",
                 zone: "sur"
             },
             {
@@ -1124,7 +971,6 @@
                 status: "resuelto",
                 reporter: "Vecinos Unidos",
                 contact: "vecinos@unidos.org",
-                evidence: "Fotos y testimonios",
                 zone: "este"
             },
             {
@@ -1139,7 +985,6 @@
                 status: "cerrado",
                 reporter: "Control Ambiental",
                 contact: "control@ambiental.gob",
-                evidence: "Imágenes satelitales",
                 zone: "oeste"
             },
             {
@@ -1154,7 +999,6 @@
                 status: "investigacion",
                 reporter: "Guardaparques",
                 contact: "parque@nacional.com",
-                evidence: "Imágenes aéreas",
                 zone: "norte"
             }
         ];
@@ -1163,6 +1007,7 @@
         let currentPage = 1;
         const itemsPerPage = 5;
         let filteredReports = [...reportsDatabase];
+        let editingReportId = null;
 
         // FUNCIÓN PARA GUARDAR EN LOCALSTORAGE
         function saveToLocalStorage() {
@@ -1172,7 +1017,6 @@
         // Inicializar la tabla
         function initializeTable() {
             renderTable();
-            updateStatistics();
             renderPagination();
         }
 
@@ -1259,20 +1103,6 @@
                 `;
                 tableBody.appendChild(row);
             }
-        }
-
-        // Actualizar estadísticas
-        function updateStatistics() {
-            document.getElementById('totalReports').textContent = filteredReports.length;
-            
-            const pending = filteredReports.filter(r => r.status === 'pendiente').length;
-            document.getElementById('pendingReports').textContent = pending;
-            
-            const resolved = filteredReports.filter(r => r.status === 'resuelto' || r.status === 'cerrado').length;
-            document.getElementById('resolvedReports').textContent = resolved;
-            
-            const highPriority = filteredReports.filter(r => r.priority === 'alta').length;
-            document.getElementById('highPriority').textContent = highPriority;
         }
 
         // Renderizar paginación
@@ -1401,11 +1231,6 @@
                 </div>
                 
                 <div class="detail-row">
-                    <div class="detail-label">Evidencias:</div>
-                    <div class="detail-value">${report.evidence || 'Sin evidencias registradas'}</div>
-                </div>
-                
-                <div class="detail-row">
                     <div class="detail-label">Reportado por:</div>
                     <div class="detail-value">${report.reporter}</div>
                 </div>
@@ -1430,9 +1255,8 @@
             };
             return zones[zone] || zone;
         }
-        // Editar denuncia
-        let editingReportId = null;
 
+        // Editar denuncia
         function editReport(reportId) {
             const report = reportsDatabase.find(r => r.id === reportId);
             if (!report) return;
@@ -1440,16 +1264,14 @@
             editingReportId = reportId;
             
             // Cargar datos en el formulario
-            const form = document.getElementById('reportForm');
-            form.querySelector('input[type="text"]').value = report.location;
-            form.querySelector('input[type="date"]').value = report.date;
-            form.querySelector('input[type="time"]').value = report.time;
-            form.querySelector('#problemType').value = report.type;
-            form.querySelector('#priority').value = report.priority;
-            form.querySelector('#description').value = report.description;
-            form.querySelector('#evidence').value = report.evidence || '';
-            form.querySelector('#zone').value = report.zone;
-            form.querySelector('#reporter').value = report.reporter;
+            document.getElementById('location').value = report.location;
+            document.getElementById('date').value = report.date;
+            document.getElementById('time').value = report.time;
+            document.getElementById('problemType').value = report.type;
+            document.getElementById('priority').value = report.priority;
+            document.getElementById('description').value = report.description;
+            document.getElementById('zone').value = report.zone;
+            document.getElementById('reporter').value = report.reporter;
             
             // Cambiar título del formulario
             document.querySelector('.form-title').textContent = '✏️ EDITAR DENUNCIA';
@@ -1481,20 +1303,34 @@
         document.getElementById('reportForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
-            const form = this;
-            const location = form.querySelector('input[type="text"]').value;
-            const date = form.querySelector('input[type="date"]').value;
-            const time = form.querySelector('input[type="time"]').value;
-            const type = form.querySelector('#problemType').value;
-            const typeText = form.querySelector('#problemType option:checked').text;
-            const priority = form.querySelector('#priority').value;
-            const description = form.querySelector('#description').value;
-            const evidence = form.querySelector('#evidence').value;
-            const zone = form.querySelector('#zone').value;
-            const reporter = form.querySelector('#reporter').value || 'Anónimo';
+            const location = document.getElementById('location').value;
+            const date = document.getElementById('date').value;
+            const time = document.getElementById('time').value;
+            const type = document.getElementById('problemType').value;
+            const typeText = document.getElementById('problemType').options[document.getElementById('problemType').selectedIndex].text;
+            const priority = document.getElementById('priority').value;
+            const description = document.getElementById('description').value;
+            const zone = document.getElementById('zone').value;
+            const reporter = document.getElementById('reporter').value || 'Anónimo';
             
             if (editingReportId) {
-                
+                // Modo edición
+                const index = reportsDatabase.findIndex(r => r.id === editingReportId);
+                if (index !== -1) {
+                    reportsDatabase[index] = {
+                        ...reportsDatabase[index],
+                        date,
+                        time,
+                        location,
+                        type,
+                        typeText,
+                        description,
+                        priority,
+                        zone,
+                        reporter
+                    };
+                    alert(`✅ Denuncia ${editingReportId} actualizada correctamente.`);
+                }
             } else {
                 // Modo nueva denuncia
                 const newId = `DEN-${String(reportsDatabase.length + 1).padStart(3, '0')}`;
@@ -1510,7 +1346,6 @@
                     status: 'pendiente',
                     reporter,
                     contact: `${reporter.toLowerCase().replace(/\s+/g, '.')}@seventhcycle.com`,
-                    evidence,
                     zone
                 };
                 
@@ -1525,66 +1360,18 @@
             document.getElementById('newReportForm').style.display = 'none';
             
             // Resetear formulario
-            form.reset();
+            document.getElementById('reportForm').reset();
             
             // Restaurar título
             document.querySelector('.form-title').textContent = '📝 NUEVA DENUNCIA AMBIENTAL';
+            
+            // Limpiar variable de edición
+            editingReportId = null;
             
             // Actualizar vista
             filteredReports = [...reportsDatabase];
             currentPage = 1;
             initializeTable();
-        });
-
-        // Aplicar filtros
-        document.getElementById('applyFilters').addEventListener('click', function() {
-            const date = document.getElementById('filterDate').value;
-            const zone = document.getElementById('filterZone').value;
-            const type = document.getElementById('filterType').value;
-            const status = document.getElementById('filterStatus').value;
-            const priority = document.getElementById('filterPriority').value;
-            
-            filteredReports = reportsDatabase.filter(report => {
-                let match = true;
-                
-                if (date && report.date !== date) match = false;
-                if (zone && report.zone !== zone) match = false;
-                if (type && report.type !== type) match = false;
-                if (status && report.status !== status) match = false;
-                if (priority && report.priority !== priority) match = false;
-                
-                return match;
-            });
-            
-            currentPage = 1;
-            renderTable();
-            updateStatistics();
-            renderPagination();
-            
-            // Animación de confirmación
-            this.classList.add('success-animation');
-            setTimeout(() => {
-                this.classList.remove('success-animation');
-            }, 500);
-        });
-
-        // Restablecer filtros
-        document.getElementById('resetFilters').addEventListener('click', function() {
-            document.getElementById('filterDate').value = '';
-            document.getElementById('filterZone').value = '';
-            document.getElementById('filterType').value = '';
-            document.getElementById('filterStatus').value = '';
-            document.getElementById('filterPriority').value = '';
-            
-            filteredReports = [...reportsDatabase];
-            currentPage = 1;
-            initializeTable();
-            
-            // Animación
-            this.classList.add('success-animation');
-            setTimeout(() => {
-                this.classList.remove('success-animation');
-            }, 500);
         });
 
         // Manejo de botones del formulario
@@ -1596,13 +1383,13 @@
             
             // Establecer fecha de hoy por defecto
             const today = new Date().toISOString().split('T')[0];
-            document.querySelector('input[type="date"]').value = today;
+            document.getElementById('date').value = today;
             
             // Establecer hora actual por defecto
             const now = new Date();
             const hours = String(now.getHours()).padStart(2, '0');
             const minutes = String(now.getMinutes()).padStart(2, '0');
-            document.querySelector('input[type="time"]').value = `${hours}:${minutes}`;
+            document.getElementById('time').value = `${hours}:${minutes}`;
         });
 
         document.getElementById('cancelForm').addEventListener('click', function() {
@@ -1655,16 +1442,17 @@
         document.addEventListener('DOMContentLoaded', function() {
             initializeTable();
             
-            // Configurar fecha mínima en el filtro de fecha (últimos 30 días)
-            const dateFilter = document.getElementById('filterDate');
+            // Configurar fecha por defecto en el formulario
             const today = new Date();
-            const lastMonth = new Date(today.getFullYear(), today.getMonth() - 1, today.getDate());
-            dateFilter.min = lastMonth.toISOString().split('T')[0];
-            dateFilter.max = today.toISOString().split('T')[0];
+            const formDate = document.getElementById('date');
+            formDate.value = today.toISOString().split('T')[0];
+            
+            // Configurar hora por defecto en el formulario
+            const formTime = document.getElementById('time');
+            const hours = String(today.getHours()).padStart(2, '0');
+            const minutes = String(today.getMinutes()).padStart(2, '0');
+            formTime.value = `${hours}:${minutes}`;
         });
     </script>
 </body>
-
 </html>
-
-
