@@ -318,43 +318,6 @@
             color: white;
         }
 
-        /* ACCIONES */
-        .action-cell {
-            display: flex;
-            gap: 10px;
-        }
-
-        .action-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            font-size: 20px;
-            transition: all 0.3s ease;
-        }
-
-        .action-view {
-            background: #3498db;
-            color: white;
-        }
-
-        .action-edit {
-            background: #f39c12;
-            color: white;
-        }
-
-        .action-delete {
-            background: #e74c3c;
-            color: white;
-        }
-
-        .action-icon:hover {
-            transform: scale(1.2);
-        }
-
         /* PAGINACIÓN */
         .pagination {
             display: flex;
@@ -657,6 +620,12 @@
                 font-size: 18px;
                 padding: 10px 20px;
             }
+            
+            .data-table th,
+            .data-table td {
+                padding: 15px 10px;
+                font-size: 18px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -678,15 +647,16 @@
                 font-size: 16px;
             }
             
-            .action-cell {
-                flex-direction: column;
-                gap: 5px;
+            .status-badge, .priority-badge {
+                min-width: 80px;
+                font-size: 14px;
+                padding: 5px 10px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- MODAL DE DETALLES -->
+    <!-- MODAL DE DETALLES (mantenido para ver detalles al hacer clic en la fila) -->
     <div id="detailModal" class="detail-modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -818,7 +788,7 @@
                 </div>
             </div>
 
-            <!-- TABLA DE DATOS -->
+            <!-- TABLA DE DATOS (sin columna de acciones) -->
             <table class="data-table" id="reportsTable">
                 <thead>
                     <tr>
@@ -828,7 +798,6 @@
                         <th>TIPO</th>
                         <th>PRIORIDAD</th>
                         <th>ESTADO</th>
-                        <th>ACCIONES</th>
                     </tr>
                 </thead>
                 <tbody id="tableBody">
@@ -1020,7 +989,7 @@
             renderPagination();
         }
 
-        // Renderizar tabla
+        // Renderizar tabla (sin acciones)
         function renderTable() {
             const tableBody = document.getElementById('tableBody');
             tableBody.innerHTML = '';
@@ -1031,6 +1000,8 @@
             
             pageReports.forEach(report => {
                 const row = document.createElement('tr');
+                row.style.cursor = 'pointer';
+                row.onclick = () => viewReportDetails(report.id);
                 
                 // Determinar clase de prioridad
                 let priorityClass = '';
@@ -1079,13 +1050,6 @@
                     <td>${report.typeText}</td>
                     <td><span class="priority-badge ${priorityClass}">${priorityText}</span></td>
                     <td><span class="status-badge ${statusClass}">${statusText}</span></td>
-                    <td>
-                        <div class="action-cell">
-                            <div class="action-icon action-view" onclick="viewReportDetails('${report.id}')">👁️</div>
-                            <div class="action-icon action-edit" onclick="editReport('${report.id}')">✏️</div>
-                            <div class="action-icon action-delete" onclick="deleteReport('${report.id}')">🗑️</div>
-                        </div>
-                    </td>
                 `;
                 
                 tableBody.appendChild(row);
@@ -1095,10 +1059,10 @@
             if (pageReports.length === 0) {
                 const row = document.createElement('tr');
                 row.innerHTML = `
-                    <td colspan="7" style="text-align: center; padding: 40px; color: #666;">
+                    <td colspan="6" style="text-align: center; padding: 40px; color: #666;">
                         <div style="font-size: 30px;">🔍</div>
                         <div style="font-size: 24px; margin-top: 10px;">No se encontraron denuncias</div>
-                        <div style="font-size: 18px; margin-top: 10px;">Prueba con otros filtros de búsqueda</div>
+                        <div style="font-size: 18px; margin-top: 10px;">Haz clic en "NUEVA DENUNCIA" para agregar una</div>
                     </td>
                 `;
                 tableBody.appendChild(row);
@@ -1166,7 +1130,7 @@
             });
         }
 
-        // Ver detalles de denuncia
+        // Ver detalles de denuncia (ahora se activa al hacer clic en la fila)
         function viewReportDetails(reportId) {
             const report = reportsDatabase.find(r => r.id === reportId);
             if (!report) return;
@@ -1254,49 +1218,6 @@
                 'centro': 'Centro'
             };
             return zones[zone] || zone;
-        }
-
-        // Editar denuncia
-        function editReport(reportId) {
-            const report = reportsDatabase.find(r => r.id === reportId);
-            if (!report) return;
-            
-            editingReportId = reportId;
-            
-            // Cargar datos en el formulario
-            document.getElementById('location').value = report.location;
-            document.getElementById('date').value = report.date;
-            document.getElementById('time').value = report.time;
-            document.getElementById('problemType').value = report.type;
-            document.getElementById('priority').value = report.priority;
-            document.getElementById('description').value = report.description;
-            document.getElementById('zone').value = report.zone;
-            document.getElementById('reporter').value = report.reporter;
-            
-            // Cambiar título del formulario
-            document.querySelector('.form-title').textContent = '✏️ EDITAR DENUNCIA';
-            
-            // Mostrar formulario
-            document.getElementById('newReportForm').style.display = 'flex';
-        }
-
-        // Eliminar denuncia
-        function deleteReport(reportId) {
-            if (confirm(`¿Estás seguro de eliminar la denuncia ${reportId}?\n\nEsta acción no se puede deshacer.`)) {
-                const index = reportsDatabase.findIndex(r => r.id === reportId);
-                if (index !== -1) {
-                    reportsDatabase.splice(index, 1);
-                    saveToLocalStorage();
-                    
-                    // Actualizar vista
-                    filteredReports = [...reportsDatabase];
-                    currentPage = 1;
-                    initializeTable();
-                    
-                    // Mostrar confirmación
-                    alert(`✅ Denuncia ${reportId} eliminada correctamente.`);
-                }
-            }
         }
 
         // Manejar envío del formulario
@@ -1456,4 +1377,3 @@
     </script>
 </body>
 </html>
-
