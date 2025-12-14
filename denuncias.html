@@ -1524,6 +1524,14 @@
             };
             return zones[zone] || zone;
         }
+        // Editar denuncia
+        let editingReportId = null;
+
+        function editReport(reportId) {
+            const report = reportsDatabase.find(r => r.id === reportId);
+            if (!report) return;
+            
+            editingReportId = reportId;
             
             // Cargar datos en el formulario
             const form = document.getElementById('reportForm');
@@ -1771,3 +1779,4 @@
 </body>
 
 </html>
+
