@@ -208,7 +208,6 @@
 
         .memory-card.matched .inner {
             transform: rotateY(180deg);
-            opacity: 0.8;
         }
 
         .face {
@@ -275,6 +274,23 @@
         .paper .card-type { background-color: #ff9800; }
         .glass .card-type { background-color: #4caf50; }
         .organic .card-type { background-color: #795548; }
+
+        /* Estilo para cartas emparejadas exitosamente */
+        .memory-card.matched.success-match .front {
+            border: 4px solid #4CAF50;
+            background-color: #e8f5e9;
+            box-shadow: 
+                0 0 20px rgba(76, 175, 80, 0.7),
+                inset 0 0 20px rgba(76, 175, 80, 0.2);
+            animation: pulse 1s ease-in-out;
+        }
+
+        /* Animación de pulso para las cartas emparejadas */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
 
         /* Panel de control */
         .control-panel {
@@ -531,7 +547,6 @@
                     <li><a href="index.html" class="nav-button">Inicio</a></li>
                     <li><a href="about.html" class="nav-button">Sobre Nosotros</a></li>
                     <li><a href="contacto.html" class="nav-button">Contáctanos</a></li>
-                    <li><a href="juego.html" class="nav-button active">Memorama</a></li>
                 </ul>
             </nav>
         </header>
@@ -762,10 +777,16 @@
                 const card2 = cards[flippedCards[1].index];
 
                 if (card1.name === card2.name) {
-                    // Pareja encontrada
+                    // Pareja encontrada - se quedan volteadas permanentemente
                     setTimeout(() => {
                         flippedCards.forEach(card => {
                             card.element.classList.add('matched');
+                            card.element.classList.add('success-match');
+                            
+                            // Remover la clase de animación después de que termine
+                            setTimeout(() => {
+                                card.element.classList.remove('success-match');
+                            }, 1000);
                         });
                         matchedPairs++;
                         flippedCards = [];
@@ -877,5 +898,4 @@
         document.addEventListener('DOMContentLoaded', initGame);
     </script>
 </body>
-
 </html>
